@@ -1,9 +1,9 @@
 # Projet 1 - INF1007 Automne 2026
 
 ## Directives
-:alarm_clock: Date de remise : **À compléter**
+:alarm_clock: Date de remise : **Dimanche 04 octobre 23:59**
 
-:mailbox_with_mail: À remettre sur **GitHub** (les modalités exactes seront précisées en classe)
+:mailbox_with_mail: À remettre sur **Moodle** sous la forme d'un fichier ZIP.
 
 ## Introduction
 
