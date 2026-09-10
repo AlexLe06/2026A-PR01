@@ -6,9 +6,9 @@ import random
 from config import (
     ASSETS_DIR, SCREEN_WIDTH, SCREEN_HEIGHT, PLATFORMS,
     PLATFORM_WIDTH, MIN_PLATFORM_GAP, MAX_PLATFORM_GAP,
-    doodle_dict, DOODLE_START_X, DOODLE_START_Y
+    doodle_dict, DOODLE_START_X, DOODLE_START_Y, DOODLE_WIDTH
 )
-from platforms import create_platform
+from platforms import create_platform, choose_platform_type
 
 # Initialisation de la fenêtre Pygame
 GAME_WINDOW = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -29,7 +29,7 @@ def generate_initial_platforms():
 
     # Plateforme de départ directement sous le Doodle : code fourni
     start_platform = create_platform(
-        DOODLE_START_X + (60 - PLATFORM_WIDTH) // 2,
+        DOODLE_START_X + (DOODLE_WIDTH - PLATFORM_WIDTH) // 2,
         DOODLE_START_Y + 70,
         "green"
     )
@@ -38,19 +38,13 @@ def generate_initial_platforms():
     current_y = DOODLE_START_Y + 70 - random.randint(MIN_PLATFORM_GAP, MAX_PLATFORM_GAP)
 
     # ======================== PARTIE 2.2 ========================
-    # TODO : Complétez la génération des autres plateformes.
+    # TODO : Ajoutez des plateformes jusqu'à ce que la partie supérieure
+    # de l'écran soit remplie.
     #
-    # Tant que current_y > 30 :
-    # 1. Choisir une position x aléatoire valide.
-    # 2. Choisir un type de plateforme avec les probabilités suivantes :
-    #       green  : 65 %
-    #       blue   : 17 %
-    #       spring : 10 %
-    #       brown  : 8 %
-    # 3. Créer la plateforme avec create_platform(...).
-    # 4. L'ajouter à PLATFORMS.
-    # 5. Diminuer current_y d'un espacement aléatoire entre
-    #    MIN_PLATFORM_GAP et MAX_PLATFORM_GAP.
+    # À chaque itération, vous devrez notamment déterminer une position
+    # horizontale valide, choisir un type avec choose_platform_type(...),
+    # ajouter la plateforme à PLATFORMS et calculer la hauteur de la suivante.
+    # Les probabilités à utiliser sont données dans le README.
 
     return
     # ===========================================================
@@ -61,18 +55,14 @@ def draw_window():
     Affiche tous les éléments graphiques du jeu : arrière-plan, plateformes,
     personnage Doodle et le score.
     """
-    # 1. Dessiner le fond
     GAME_WINDOW.blit(background_img, (0, 0))
 
-    # 2. Dessiner les plateformes
     for p in PLATFORMS:
         if p["active"]:
             GAME_WINDOW.blit(p["image"], (int(p["x"]), int(p["y"])))
 
-    # 3. Dessiner le Doodle
     GAME_WINDOW.blit(doodle_dict["image"], (int(doodle_dict["x"]), int(doodle_dict["y"])))
 
-    # 4. Afficher le score courant
     font = pygame.font.SysFont("Arial", 28, bold=True)
     score_text = font.render(f"Score : {int(doodle_dict['score'])}", True, (40, 40, 40))
     GAME_WINDOW.blit(score_text, (20, 20))
