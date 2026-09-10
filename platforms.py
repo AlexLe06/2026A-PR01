@@ -1,8 +1,9 @@
 # ======================== platforms.py ========================
 
 import os
+import random
 import pygame
-from config import ASSETS_DIR, PLATFORM_SIZE
+from config import ASSETS_DIR, PLATFORM_SIZE, MOVING_PLATFORM_SPEED
 
 # Chargement des différentes images de plateformes
 platform_green_img = pygame.image.load(os.path.join(ASSETS_DIR, "platform_green.png"))
@@ -30,27 +31,55 @@ platform_images = {
 def create_platform(x, y, platform_type="green"):
     """
     Crée et retourne un dictionnaire représentant une plateforme.
-    Types possibles :
-      - "green"  : plateforme standard fixe
-      - "blue"   : plateforme mobile horizontale
-      - "brown"  : plateforme fragile qui se brise au contact
-      - "spring" : plateforme munie d'un ressort (super saut)
+
+    Le dictionnaire ci-dessous représente pour l'instant correctement une
+    plateforme verte. Votre travail consiste à le généraliser afin qu'il
+    représente aussi correctement les plateformes bleues, marron et à ressort.
     """
 
-    # TODO : Complétez les valeurs des clés "vx" et "height".
-    # - "vx" vaut 3.0 pour une plateforme bleue et 0.0 sinon.
-    # - "height" vaut PLATFORM_SIZE[1] + 10 pour un ressort et
-    #   PLATFORM_SIZE[1] pour les autres types.
-
-    return {
+    platform = {
         "x": float(x),
         "y": float(y),
-        "type": platform_type,
-        "image": platform_images[platform_type],
-        "vx": 0.0,  # TODO
+        "type": "green",                    # TODO
+        "image": platform_images["green"],  # TODO
+        "vx": 0.0,                          # TODO
         "active": True,
         "width": PLATFORM_SIZE[0],
-        "height": PLATFORM_SIZE[1]  # TODO
+        "height": PLATFORM_SIZE[1]           # TODO
     }
 
+    # TODO : Modifiez le dictionnaire ci-dessus pour qu'il dépende réellement
+    # de l'argument platform_type.
+    #
+    # Contraintes :
+    # - l'image doit être obtenue à partir de platform_images ;
+    # - une plateforme bleue se déplace à MOVING_PLATFORM_SPEED ;
+    # - une plateforme à ressort est 10 pixels plus haute ;
+    # - les autres plateformes sont immobiles et gardent la hauteur normale.
+
+    return platform
+
 # ===========================================================
+
+
+# ======================== PARTIE 2.2 ========================
+def choose_platform_type(green_probability, blue_probability, spring_probability):
+    """
+    Choisit aléatoirement un type de plateforme.
+
+    Les trois paramètres donnent les probabilités respectives des plateformes
+    verte, bleue et à ressort. La probabilité restante correspond à une
+    plateforme marron.
+    """
+
+    # TODO : Utilisez random.random() et les probabilités reçues en paramètres
+    # pour retourner l'une des chaînes suivantes :
+    # "green", "blue", "spring" ou "brown".
+    #
+    # Attention : les seuils utilisés avec random.random() doivent être
+    # cumulatifs.
+
+    return "green"  # Valeur temporaire à remplacer
+
+# ===========================================================
+
