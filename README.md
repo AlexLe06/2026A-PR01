@@ -11,6 +11,8 @@ Dans ce projet, vous aurez comme tâche de compléter une version du jeu **Doodl
 
 L'objectif du jeu est de faire monter le personnage, appelé le **Doodle**, le plus haut possible en rebondissant automatiquement de plateforme en plateforme. Le joueur contrôle uniquement les déplacements horizontaux du Doodle. Lorsque celui-ci atteint une certaine hauteur dans la fenêtre, la caméra défile : les plateformes descendent à l'écran et le score augmente selon la distance parcourue.
 
+https://github.com/user-attachments/assets/0f303204-aaac-4647-a9ab-126cf3d4a84d
+
 Le jeu contient quatre types de plateformes :
 
 - **Plateforme verte** : plateforme normale et fixe ;
