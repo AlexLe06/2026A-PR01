@@ -373,7 +373,7 @@ Vous n'avez pas à programmer les éléments suivants :
 
 # Directives pour la remise
 
-Pour remettre votre travail, créez un fichier ZIP nommé `NOM_PRENOM-PR01.zip`, où `NOM` est votre nom de famille et `PRENOM` votre prénom.
+Pour remettre votre travail, créez un fichier ZIP nommé `NOM1_PRENOM1_NOM2_PRENOM2-PR01.zip`, où `NOM1` est votre nom de famille et `PRENOM1` votre prénom, et `NOM2` `PRENOM2` ceux de votre binôme.
 
 Le fichier ZIP doit contenir le dossier `2026A-PR01` complet avec les fichiers Python et le dossier `assets/`.
 
