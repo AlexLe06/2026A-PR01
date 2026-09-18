@@ -57,6 +57,8 @@ def create_platform(x, y, platform_type="green"):
     # - une plateforme à ressort est 10 pixels plus haute ;
     # - les autres plateformes sont immobiles et gardent la hauteur normale.
 
+    
+
     return platform
 
 # ===========================================================
