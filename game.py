@@ -50,14 +50,15 @@ def move_doodle():
             doodle_dict.update({"image": doodle_right_img})
             doodle_dict.update({"x": doodle_dict.get("x") + DOODLE_SPEED})
         
-        
-
 
     # TODO : Implémentez le Screen Wrap pour qu'une partie du Doodle puisse
     # sortir d'un côté avant de réapparaître de l'autre.
     # N'utilisez pas de dimensions numériques écrites directement.
 
-
+    if doodle_dict.get("x") > SCREEN_WIDTH - DOODLE_WIDTH // 2:
+        doodle_dict.update({"x": -DOODLE_WIDTH //2 })
+    elif (doodle_dict.get("x") < -DOODLE_WIDTH // 2):
+        doodle_dict.update({"x": SCREEN_WIDTH - DOODLE_WIDTH // 2})
 
     return
 
