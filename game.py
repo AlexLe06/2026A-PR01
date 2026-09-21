@@ -75,6 +75,8 @@ def move_platforms():
     # bleues encore actives. Elles doivent rester dans la fenêtre en inversant
     # leur vitesse lorsqu'elles atteignent un bord.
 
+    
+
     return
 
 # ===========================================================
