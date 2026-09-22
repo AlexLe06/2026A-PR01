@@ -21,9 +21,13 @@ def apply_gravity():
     """
     # TODO : Mettez à jour la vitesse verticale puis la position verticale
     # du Doodle à partir de GRAVITY.
-    # vel_y = 
+    # vel_y = (JUMP_VELOCITY ** 2) + 2(GRAVITY)
 
+    # A REFAIRE PEUT ETRE
 
+    doodle_dict.update({"vel_y" : doodle_dict.get("vel_y") - GRAVITY})
+    doodle_dict.update({"y" : doodle_dict.get("y")})
+    
     return
 
 # ===========================================================

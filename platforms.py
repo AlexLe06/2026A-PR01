@@ -81,13 +81,13 @@ def choose_platform_type(green_probability, blue_probability, spring_probability
     # cumulatifs.
 
     type = ""
-    random = random.random()
     
-    if random < green_probability:
+    
+    if random.random() < green_probability:
         type = "green"
-    elif random < green_probability + blue_probability:
+    elif random.random() < green_probability + blue_probability:
         type = "blue"
-    elif random < green_probability + blue_probability + spring_probability:
+    elif random.random() < green_probability + blue_probability + spring_probability:
         type = "spring"
     else:
         type = "brown"
