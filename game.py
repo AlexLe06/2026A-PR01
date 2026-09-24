@@ -115,6 +115,28 @@ def scroll_camera():
     Fait défiler le monde lorsque le Doodle dépasse CAMERA_SCROLL_THRESHOLD.
     Met à jour le score et maintient les plateformes visibles.
     """
+      if doodle_dict["y"] < CAMERA_SCROLL_THRESHOLD:
+        distance = CAMERA_SCROLL_THRESHOLD - doodle_dict["y"]
+
+        
+        doodle_dict["y"] = CAMERA_SCROLL_THRESHOLD # 1. Le Doodle reste au seuil
+
+        
+        for platform in PLATFORMS: # 2. Les plateformes descendent de la même distance
+            platform["y"] += distance
+
+        
+        doodle_dict["score"] += distance # 3. Score et meilleur score
+        if doodle_dict["score"] > doodle_dict["high_score"]:
+            doodle_dict["high_score"] = doodle_dict["score"]
+
+
+        PLATFORMS[:] = [p for p in PLATFORMS if p["y"] < SCREEN_HEIGHT] # 4. Retirer les plateformes sorties sous l'écran
+
+        
+        generate_new_platforms()
+
+    return
     # TODO : Lorsque le Doodle dépasse le seuil de caméra, il doit rester
     # visuellement au seuil pendant que les plateformes sont déplacées vers
     # le bas de la même distance.
