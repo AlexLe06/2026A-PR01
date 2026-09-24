@@ -115,7 +115,7 @@ def scroll_camera():
     Fait défiler le monde lorsque le Doodle dépasse CAMERA_SCROLL_THRESHOLD.
     Met à jour le score et maintient les plateformes visibles.
     """
-      if doodle_dict["y"] < CAMERA_SCROLL_THRESHOLD:
+    if doodle_dict["y"] < CAMERA_SCROLL_THRESHOLD:
         distance = CAMERA_SCROLL_THRESHOLD - doodle_dict["y"]
 
         
