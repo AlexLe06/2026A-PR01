@@ -19,13 +19,15 @@ def apply_gravity():
     Applique la gravité au Doodle en augmentant progressivement sa vitesse verticale (vel_y).
     Met à jour la position verticale (y) du Doodle.
     """
-    doodle_dict["vel_y"] += GRAVITY
-    doodle_dict["y"] += doodle_dict["vel_y"]
     # TODO : Mettez à jour la vitesse verticale puis la position verticale
     # du Doodle à partir de GRAVITY.
-    # vel_y = 
+    # vel_y = (JUMP_VELOCITY ** 2) + 2(GRAVITY)
 
+    # A REFAIRE PEUT ETRE
 
+    doodle_dict.update({"vel_y" : doodle_dict.get("vel_y") - GRAVITY})
+    doodle_dict.update({"y" : doodle_dict.get("y")})
+    
     return
 
 # ===========================================================
@@ -73,11 +75,6 @@ def move_platforms():
     Déplace horizontalement les plateformes mobiles ("blue").
     Fait rebondir les plateformes lorsqu'elles atteignent les bords de la fenêtre.
     """
-    for platform in PLATFORMS:
-        if platform["type"] == "blue" and platform["active"]:
-                platform["x"] += platform["vx"]
-
-    return
     # TODO : Parcourez les plateformes et gérez le déplacement des plateformes
     # bleues encore actives. Elles doivent rester dans la fenêtre en inversant
     # leur vitesse lorsqu'elles atteignent un bord.
@@ -96,7 +93,6 @@ def check_platform_collisions():
     Le rebond ne se produit QUE lorsque le Doodle descend (vel_y > 0)
     et qu'il arrive sur le dessus d'une plateforme.
     """
-    #for platform in PLATFORMS: 
     # TODO : Implémentez la détection d'un atterrissage.
     #
     # Contraintes :
@@ -122,23 +118,6 @@ def scroll_camera():
     Fait défiler le monde lorsque le Doodle dépasse CAMERA_SCROLL_THRESHOLD.
     Met à jour le score et maintient les plateformes visibles.
     """
-    if doodle_dict["y"] < CAMERA_SCROLL_THRESHOLD:
-        distance = CAMERA_SCROLL_THRESHOLD - doodle_dict["y"]
-
-        # 1. Le Doodle reste au seuil
-        doodle_dict["y"] = CAMERA_SCROLL_THRESHOLD
-
-        # 2. Les plateformes descendent de la même distance
-        for platform in PLATFORMS:
-            platform["y"] += distance
-
-        # 3. Score et meilleur score
-        doodle_dict["score"] += distance
-        if doodle_dict["score"] > doodle_dict["high_score"]:
-            doodle_dict["high_score"] = doodle_dict["score"]
-
-    return
-    
     # TODO : Lorsque le Doodle dépasse le seuil de caméra, il doit rester
     # visuellement au seuil pendant que les plateformes sont déplacées vers
     # le bas de la même distance.
@@ -158,7 +137,6 @@ def generate_new_platforms():
     Génère de nouvelles plateformes au-dessus du haut de l'écran pour maintenir
     un flux continu lorsque la caméra défile.
     """
-    platfrom = []
     # TODO : Complétez cette fonction en vous inspirant de la logique de
     # génération initiale, sans la recopier inutilement.
     #
