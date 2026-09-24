@@ -6,7 +6,7 @@ from config import (
     SCREEN_WIDTH, SCREEN_HEIGHT, GRAVITY, JUMP_VELOCITY, SPRING_JUMP_VELOCITY,
     DOODLE_SPEED, DOODLE_WIDTH, DOODLE_HEIGHT, PLATFORM_WIDTH,
     MIN_PLATFORM_GAP, MAX_PLATFORM_GAP, CAMERA_SCROLL_THRESHOLD,
-    PLATFORMS, doodle_dict, DOODLE_START_X, DOODLE_START_Y, LIVES
+    PLATFORMS, doodle_dict, DOODLE_START_X, DOODLE_START_Y, LIVES, MOVING_PLATFORM_SPEED
 )
 from platforms import create_platform, choose_platform_type
 from doodle import doodle_left_img, doodle_right_img
@@ -14,7 +14,7 @@ from window import generate_initial_platforms
 
 
 # ======================== PARTIE 3.1 ========================
-def apply_gravity():
+def apply_gravity(): #JOUDKATBE
     """
     Applique la gravité au Doodle en augmentant progressivement sa vitesse verticale (vel_y).
     Met à jour la position verticale (y) du Doodle.
@@ -31,7 +31,7 @@ def apply_gravity():
 
 
 # ======================== PARTIE 1.2 ========================
-def move_doodle():
+def move_doodle(): #ALEX
     """
     Gère le déplacement horizontal du Doodle selon les touches pressées (Flèches ou A/D).
     Implémente le passage fluide d'un côté de l'écran à l'autre (Screen Wrap).
@@ -67,11 +67,19 @@ def move_doodle():
 
 
 # ======================== PARTIE 2.3 ========================
-def move_platforms():
+def move_platforms(): #JOUDKATBE
     """
     Déplace horizontalement les plateformes mobiles ("blue").
     Fait rebondir les plateformes lorsqu'elles atteignent les bords de la fenêtre.
     """
+    for platform in PLATFORMS:  #check si la platform est bleu
+        if platform["type"] == "blue":
+            platform["x"]+= platform["vx"] #platform["vx"] = 3 
+            if (platform["x"]+platform["width"])>SCREEN_WIDTH:
+                platform["vx"]= -platform["vx"]
+            if platform["x"]==0:
+                platform["vx"]= abs(platform["vx"]) # si sa touche lextremiter gauche, la vitesse devien positive
+        #platforme platform["vx"]
     # TODO : Parcourez les plateformes et gérez le déplacement des plateformes
     # bleues encore actives. Elles doivent rester dans la fenêtre en inversant
     # leur vitesse lorsqu'elles atteignent un bord.
@@ -110,12 +118,12 @@ def check_platform_collisions():
 
 
 # ======================== PARTIE 3.3 ========================
-def scroll_camera():
+def scroll_camera():# joud Katbe
     """
     Fait défiler le monde lorsque le Doodle dépasse CAMERA_SCROLL_THRESHOLD.
     Met à jour le score et maintient les plateformes visibles.
     """
-      if doodle_dict["y"] < CAMERA_SCROLL_THRESHOLD:
+    if doodle_dict["y"] < CAMERA_SCROLL_THRESHOLD:
         distance = CAMERA_SCROLL_THRESHOLD - doodle_dict["y"]
 
         
@@ -151,11 +159,24 @@ def scroll_camera():
 
 
 # ======================== PARTIE 3.4 ========================
-def generate_new_platforms():
+def generate_new_platforms():  # joudkatbe
     """
     Génère de nouvelles plateformes au-dessus du haut de l'écran pour maintenir
     un flux continu lorsque la caméra défile.
     """
+    # Point de départ : la plateforme la plus haute (le plus petit y)
+    if len(PLATFORMS) == 0:
+        plus_haute = SCREEN_HEIGHT
+    else:
+        plus_haute = min(p["y"] for p in PLATFORMS)
+
+    # Ajouter des plateformes tant que le haut de l'écran n'est pas rempli
+    while plus_haute > 0:
+        plus_haute -= random.randint(MIN_PLATFORM_GAP, MAX_PLATFORM_GAP)
+        x = random.uniform(0, SCREEN_WIDTH - PLATFORM_WIDTH)
+        type_plateforme = choose_platform_type(0.55, 0.20, 0.13)
+        PLATFORMS.append(create_platform(x, plus_haute, type_plateforme))
+
     # TODO : Complétez cette fonction en vous inspirant de la logique de
     # génération initiale, sans la recopier inutilement.
     #
