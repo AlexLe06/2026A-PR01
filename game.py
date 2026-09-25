@@ -114,23 +114,25 @@ def check_platform_collisions():
 
     if doodle_dict["vel_y"] > 0:
         for platform in PLATFORMS:
-
-            if (platform["active"] and rects_collide((doodle_dict["x"], 
-                    doodle_dict["y"], DOODLE_WIDTH, DOODLE_WIDTH),(platform["x"], platform["y"],
-                    platform["width"], platform["height"]))
+            r1 = (doodle_dict["x"], doodle_dict["y"], DOODLE_WIDTH, DOODLE_HEIGHT)
+            r2 = (platform["x"], platform["y"], platform["width"], -14)
+            
+            if (platform["active"] and rects_collide(r1, r2)
+                    and not (doodle_dict["y"] == platform["y"])
                     ):
-                
+
                 if platform["type"] in ["green", "blue"]:
-                    doodle_dict["vel_y"] += JUMP_VELOCITY
+                    doodle_dict["vel_y"] = JUMP_VELOCITY
                     doodle_dict["y"] += doodle_dict["vel_y"]
                 elif platform["type"] == "spring":
-                    doodle_dict["vel_y"] += SPRING_JUMP_VELOCITY
+                    doodle_dict["vel_y"] = SPRING_JUMP_VELOCITY
                     doodle_dict["y"] += doodle_dict["vel_y"]
                 else:
-                    doodle_dict["vel_y"] += JUMP_VELOCITY
+                    doodle_dict["vel_y"] = JUMP_VELOCITY
                     doodle_dict["y"] += doodle_dict["vel_y"]
                     platform["active"] = False
 
+       
 
     return
 
