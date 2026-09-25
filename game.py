@@ -77,7 +77,7 @@ def move_platforms(): #JOUDKATBE
             platform["x"]+= platform["vx"] #platform["vx"] = 3 
             if (platform["x"]+platform["width"])>SCREEN_WIDTH:
                 platform["vx"]= -platform["vx"]
-            if platform["x"]==0:
+            if platform["x"]<=0:
                 platform["vx"]= abs(platform["vx"]) # si sa touche lextremiter gauche, la vitesse devien positive
         #platforme platform["vx"]
     # TODO : Parcourez les plateformes et gérez le déplacement des plateformes
